@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
-from email_planilha import salvar_em_excel
+from email_planilha import gerar_planilha
 from email_buscar import processar_email
 
 app = Flask(__name__)
@@ -26,8 +26,9 @@ def obter_emails_planilha():
 
     # Chama a função processar_email com os detalhes fornecidos na solicitação
     emails = processar_email(searchObj)
-    # Retorna os e-mails encontrados como JSON
-    return salvar_em_excel(emails)
+    response = gerar_planilha(emails)
+    print(response)
+    return response
 
 if __name__ == '__main__':
     app.run(debug=True)

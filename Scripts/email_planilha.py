@@ -2,9 +2,8 @@ from openpyxl import Workbook
 from flask import make_response
 import io
 
-
-def salvar_em_excel(email_results):
-    # Criar um novo arquivo Excel
+def gerar_planilha(email_results):
+    # Criar um novo arquivo Excel em memória
     wb = Workbook()
     ws = wb.active
 
@@ -13,7 +12,7 @@ def salvar_em_excel(email_results):
     for result in email_results:
         ws.append([result['remetente'], result['assunto'], result['data']])
 
-    # Salvar o arquivo Excel
+    # Salvar a planilha em memória
     excel_data = io.BytesIO()
     wb.save(excel_data)
     excel_data.seek(0)
